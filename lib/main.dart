@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'providers/auth_provider.dart'; // ✅ Correct
+import 'package:firebase_core/firebase_core.dart'; // ✅ Import Firebase
+import 'firebase_options.dart'; // ✅ Import Firebase options
+import 'providers/auth_provider.dart';
 import 'providers/traffic_provider.dart';
 import 'providers/settings_provider.dart';
 import 'services/notification_service.dart';
@@ -8,6 +10,11 @@ import 'views/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // ✅ Initialize Firebase
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // ✅ Initialize Notifications
   await NotificationService().initialize();
 
   runApp(
